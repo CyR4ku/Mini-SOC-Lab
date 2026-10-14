@@ -20,8 +20,8 @@ Investigation: Checked network interfaces, Netplan configuration, and package re
 Solution: Enabled DHCP for the NAT interface using Netplan and refreshed the APT package lists.
 Result: Network connectivity and package installation worked successfully.
 
-**Entry 4 - Windows Agent Installation
-**Problem: The WazuhSvc service was not found after the initial Windows Agent installation attempt.
+**Entry 4 - Windows Agent Installation**
+Problem: The WazuhSvc service was not found after the initial Windows Agent installation attempt.
 Investigation: Checked the MSI installer, Windows services, and the msiexec process.
 Solution: Reinstalled Wazuh Agent with MSI logging and verified the installation exit code.
 Result: Installation returned ExitCode 0, and WazuhSvc entered the Running state.
