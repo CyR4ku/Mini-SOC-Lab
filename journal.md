@@ -1,95 +1,77 @@
-\# Mini-SOC — Week 1 Lab Journal
+Mini-SOC — Week 1 Lab Journal
 
-\*\*Project:\*\* LabShop Mini-SOC
+Project: LabShop Mini-SOC
+Platform: VMware Workstation, Wazuh 4.14.8
+Dates: October 13–14, 2026
 
-\*\*Platform:\*\* VMware Workstation, Wazuh 4.14.8
+Entry 1 — Wazuh Administrator Password Issue
 
-\*\*Dates:\*\* October 13–14, 2026
+Problem: After changing the default administrator password, authentication failed with HTTP 401.
 
+Investigation: Checked the administrator password hash and Docker configuration.
 
+Solution: Restored the clean environment, regenerated the password hash, verified that it matched the new password, and applied the updated security configuration.
 
-\## Entry 1 — Wazuh Administrator Password Issue
+Result: The new password returned HTTP 200, while the old password returned HTTP 401.
 
-\*\*Problem:\*\* After changing the default administrator password, authentication failed with HTTP 401.
+Entry 2 — Docker Network Failure
 
-\*\*Investigation:\*\* Checked the administrator password hash and the Docker configuration.
+Problem: Wazuh Dashboard became inaccessible even though all three Docker containers were running.
 
-\*\*Solution:\*\* Restored the clean environment, regenerated the password hash, verified that it matched the new password, and applied the updated security configuration.
+Investigation: Checked Docker logs, HTTPS connectivity, container IP addresses, and the Linux routing table. The Docker bridge route was missing.
 
-\*\*Result:\*\* New password returned HTTP 200, while the old password returned HTTP 401.
+Solution: Configured systemd-networkd to leave Docker interfaces unmanaged and restarted the network and Docker services.
 
+Result: Docker bridge routing was restored, and the Dashboard became accessible again.
 
+Entry 3 — Linux NAT and Package Installation
 
-\## Entry 2 — Docker Network Failure
+Problem: The temporary NAT adapter on ubuntu-web did not receive an IP address. Later, APT returned HTTP 404 during package installation.
 
-\*\*Problem:\*\* Wazuh Dashboard became inaccessible even though all three Docker containers were running.
+Investigation: Checked network interfaces, Netplan configuration, and package repository information.
 
-\*\*Investigation:\*\* Checked Docker logs, HTTPS connectivity, container IP addresses, and the Linux routing table. The Docker bridge route was missing.
+Solution: Enabled DHCP for the NAT interface using Netplan and refreshed the APT package lists.
 
-\*\*Solution:\*\* Configured systemd-networkd to leave Docker interfaces unmanaged and restarted the network and Docker services.
+Result: Network connectivity and package installation worked successfully.
 
-\*\*Result:\*\* Docker bridge routing was restored, and the Dashboard became accessible again.
+Entry 4 — Windows Agent Installation
 
+Problem: The WazuhSvc service was not found after the initial Windows Agent installation attempt.
 
+Investigation: Checked the MSI installer, Windows services, and the msiexec process.
 
-\## Entry 3 — Linux NAT and Package Installation
+Solution: Reinstalled Wazuh Agent with MSI logging and verified the installation exit code.
 
-\*\*Problem:\*\* The temporary NAT adapter on ubuntu-web did not receive an IP address. Later, APT returned HTTP 404 during package installation.
+Result: Installation returned ExitCode 0, and WazuhSvc entered the Running state.
 
-\*\*Investigation:\*\* Checked network interfaces, Netplan configuration, and package repository information.
+Entry 5 — Sysmon Event Visibility and Time Synchronization
 
-\*\*Solution:\*\* Enabled DHCP for the NAT interface using Netplan and refreshed the APT package lists.
+Problem: Sysmon generated Windows events, but some recent events were difficult to locate in Wazuh Discover.
 
-\*\*Result:\*\* Network connectivity and package installation worked successfully.
+Investigation: Checked the Sysmon Operational log, Wazuh Agent configuration, event timestamps, and time zones.
 
+Solution: Corrected the Windows time zone to Azerbaijan Standard Time and aligned the system clock with the SIEM server.
 
+Result: Sysmon Process Creation events were successfully located in Wazuh Discover.
 
-\## Entry 4 — Windows Agent Installation
+Entry 6 — Persistence Verification
 
-\*\*Problem:\*\* The WazuhSvc service was not found after the initial Windows Agent installation attempt.
+Objective: Verify that Wazuh configuration, agents, and alerts survive service restarts and system reboot.
 
-\*\*Investigation:\*\* Checked the MSI installer, Windows services, and the msiexec process.
+Actions: Stopped and started the Wazuh Docker containers, then rebooted siem-host.
 
-\*\*Solution:\*\* Reinstalled Wazuh Agent with MSI logging and verified the installation exit code.
+Result: All Wazuh components returned to operation, both agents were Active, and previous security alerts remained available.
 
-\*\*Result:\*\* Installation returned ExitCode 0, and WazuhSvc entered the Running state.
+Lessons Learned
 
+Verify infrastructure and network connectivity before troubleshooting applications.
 
+Container status alone does not guarantee service availability.
 
-\## Entry 5 — Sysmon Event Visibility and Time Synchronization
+Accurate time synchronization is essential for SIEM investigations.
 
-\*\*Problem:\*\* Sysmon generated Windows events, but some recent events were difficult to locate in Wazuh Discover.
+Raw events and security alerts are not the same.
 
-\*\*Investigation:\*\* Checked the Sysmon Operational log, Wazuh Agent configuration, event timestamps, and time zones.
+Snapshots significantly reduce recovery time.
 
-\*\*Solution:\*\* Corrected the Windows time zone to Azerbaijan Standard Time and aligned the system clock with the SIEM server.
-
-\*\*Result:\*\* Sysmon Process Creation events were successfully located in Wazuh Discover.
-
-
-
-\## Entry 6 — Persistence Verification
-
-
-
-\*\*Objective:\*\* Verify that Wazuh configuration, agents, and alerts survive service restarts and system reboot.
-
-\*\*Actions:\*\* Stopped and started the Wazuh Docker containers, then rebooted siem-host.
-
-\*\*Result:\*\* All Wazuh components returned to operation, both agents were Active, and previous security alerts remained available.
-
-
-
-\## Lessons Learned
-
-\- Verify infrastructure and network connectivity before troubleshooting applications.
-
-\- Container status alone does not guarantee service availability.
-
-\- Accurate time synchronization is essential for SIEM investigations.
-
-\- Raw events and security alerts are not the same.
-
-\- Snapshots significantly reduce recovery time.
-
-\- Clear documentation makes troubleshooting and rebuilding easier.
+Clear documentation makes troubleshooting and rebuilding easier.
