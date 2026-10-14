@@ -1,4 +1,4 @@
-# Mini-SOC — IP Address Table
+# Mini-SOC - IP Address Table
 
 | VM | Operating System | Interface | IP Address | Network |
 |---|---|---|---|---|
