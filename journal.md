@@ -1,12 +1,11 @@
-# Mini-SOC — Week 1 Lab Journal
+# Mini-SOC - Week 1 Lab Journal
 
 **Project:** LabShop Mini-SOC  
 **Platform:** VMware Workstation, Wazuh 4.14.8  
-**Dates:** October 13–14, 2026
 
 ---
 
-## Entry 1 — Wazuh Administrator Password Issue
+## Entry 1 - Wazuh Administrator Password Issue
 
 **Problem:** After changing the default administrator password, authentication failed with HTTP 401.
 
@@ -16,7 +15,7 @@
 
 **Result:** The new password returned HTTP 200, while the old password returned HTTP 401.
 
-## Entry 2 — Docker Network Failure
+## Entry 2 - Docker Network Failure
 
 **Problem:** Wazuh Dashboard became inaccessible even though all three Docker containers were running.
 
@@ -26,7 +25,7 @@
 
 **Result:** Docker bridge routing was restored, and the Dashboard became accessible again.
 
-## Entry 3 — Linux NAT and Package Installation
+## Entry 3 - Linux NAT and Package Installation
 
 **Problem:** The temporary NAT adapter on ubuntu-web did not receive an IP address. Later, APT returned HTTP 404 during package installation.
 
@@ -36,7 +35,7 @@
 
 **Result:** Network connectivity and package installation worked successfully.
 
-## Entry 4 — Windows Agent Installation
+## Entry 4 - Windows Agent Installation
 
 **Problem:** The WazuhSvc service was not found after the initial Windows Agent installation attempt.
 
@@ -46,7 +45,7 @@
 
 **Result:** Installation returned ExitCode 0, and WazuhSvc entered the Running state.
 
-## Entry 5 — Sysmon Event Visibility and Time Synchronization
+## Entry 5 - Sysmon Event Visibility and Time Synchronization
 
 **Problem:** Sysmon generated Windows events, but some recent events were difficult to locate in Wazuh Discover.
 
@@ -56,7 +55,7 @@
 
 **Result:** Sysmon Process Creation events were successfully located in Wazuh Discover.
 
-## Entry 6 — Persistence Verification
+## Entry 6 - Persistence Verification
 
 **Objective:** Verify that Wazuh configuration, agents, and alerts survive service restarts and system reboot.
 
