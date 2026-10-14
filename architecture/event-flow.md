@@ -1,4 +1,4 @@
-# Mini-SOC — Security Event Flow
+# Mini-SOC - Security Event Flow
 
 ## Event Flow
 
