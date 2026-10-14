@@ -1,6 +1,6 @@
 **Mini-SOC - Week 1 Lab Journal
 Project: LabShop Mini-SOC
-Platform: VMware Workstation, Wazuh 4.14.8
+Platform: VMware Workstation, Wazuh 4.14.8**
 
 **Entry 1 - Wazuh Administrator Password Issue**
 Problem: After changing the default administrator password, authentication failed with HTTP 401.
