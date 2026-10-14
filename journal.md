@@ -38,6 +38,7 @@ Actions: Stopped and started the Wazuh Docker containers, then rebooted siem-hos
 Result: All Wazuh components returned to operation, both agents were Active, and previous security alerts remained available.
 
 **Lessons Learned**
+
 Verify infrastructure and network connectivity before troubleshooting applications.
 Container status alone does not guarantee service availability.
 Accurate time synchronization is essential for SIEM investigations.
