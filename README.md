@@ -88,3 +88,4 @@ Both Wazuh agents reconnected successfully, and previously generated alerts rema
 - Default Wazuh administrator credentials were changed.
 - Passwords, private keys, and certificates are excluded from version control.
 - HTTPS is used for accessing the Wazuh Dashboard with a lab-generated certificate.
+-The HTTPS certificate warning appears because the Wazuh Dashboard uses a self-signed or lab-generated certificate that the browser does not trust by default.
