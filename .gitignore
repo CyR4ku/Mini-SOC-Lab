@@ -1,0 +1,25 @@
+# Passwords and secrets
+.env
+.env.*
+*.secret
+*.secrets
+
+# Private keys and certificates
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+
+# Sensitive Wazuh configurations
+docker-compose.yml
+internal_users.yml
+
+# Credentials
+credentials.json
+secrets.json
+
+# Sensitive evidence
+evidence/03-docker-wazuh/admin-password-verification.png
+evidence/03-docker-wazuh/wazuh-certificates.png
