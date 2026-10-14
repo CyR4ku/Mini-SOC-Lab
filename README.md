@@ -1,4 +1,4 @@
-# Mini-SOC Lab — Week 1
+# Mini-SOC Lab - Week 1
 
 ## Project Overview
 
@@ -20,10 +20,10 @@ Wazuh Version: 4.14.8
 
 ## Wazuh Components
 
-- Wazuh Manager — Receives and analyzes endpoint events.
-- Wazuh Indexer — Stores and indexes security alerts.
-- Wazuh Dashboard — Provides an interface for monitoring and investigation.
-- Wazuh Agents — Collect security telemetry from endpoints.
+- Wazuh Manager - Receives and analyzes endpoint events.
+- Wazuh Indexer - Stores and indexes security alerts.
+- Wazuh Dashboard - Provides an interface for monitoring and investigation.
+- Wazuh Agents - Collect security telemetry from endpoints.
 
 ## Docker Memory Usage
 
